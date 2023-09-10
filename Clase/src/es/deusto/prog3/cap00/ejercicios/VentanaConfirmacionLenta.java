@@ -10,6 +10,7 @@ import java.util.Random;
  * 1. Arréglalo para que la ventana no se quede "frita" hasta que se acabe de confirmar.
  * 2. Haz que el botón de "confirmar" no se pueda pulsar dos veces mientras el proceso
  * de confirmación se esté realizando
+ * @author fb
  */
 public class VentanaConfirmacionLenta {
 
