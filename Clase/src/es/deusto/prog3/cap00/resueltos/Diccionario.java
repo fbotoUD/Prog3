@@ -35,14 +35,14 @@ public class Diccionario {
     public static void main(String[] args) {
         Diccionario diccionario = new Diccionario();
 
-        diccionario.agregarPalabra("perro", "Animal doméstico de la familia de los cánidos.");
-        diccionario.agregarPalabra("gato", "Animal doméstico de la familia de los felinos.");
-        diccionario.agregarPalabra("perro", "Término coloquial para referirse a un amigo fiel.");
+        diccionario.agregarPalabra("Zafacoca", "Sustantivo femenino que significa un malentendido o una confusión, especialmente en una conversación o situación.");
+        diccionario.agregarPalabra("Obnubilar", "Verbo que significa confundir, turbar o entenebrecer la mente o la vista de alguien.");
+        diccionario.agregarPalabra("Gerifalte", " Halcón de gran tamaño, que vive ordinariamente en el norte de Europa.");
 
-        System.out.println("Definiciones de 'perro': " + diccionario.obtenerDefiniciones("perro"));
-        System.out.println("Definiciones de 'gato': " + diccionario.obtenerDefiniciones("gato"));
+        System.out.println("Definiciones de 'Zafacoca': " + diccionario.obtenerDefiniciones("Zafacoca"));
+        System.out.println("Definiciones de 'Gerifalte': " + diccionario.obtenerDefiniciones("Gerifalte"));
 
-        diccionario.eliminarPalabra("gato");
+        diccionario.eliminarPalabra("Zafacoca");
 
         System.out.println("\nDiccionario completo:");
         diccionario.mostrarDiccionario();

@@ -28,7 +28,6 @@ public class VentanaSeleccionDatos extends JFrame {
 //        for (int i = 0; i < 100; i++) {
 ////        	listModel.addElement("Usuario " + Integer.toString(i));
 //
-//        	String user = nombre + " " + apellido;
 //        }
         String nombreArchivo = "src/es/deusto/prog3/cap00/resueltos/DatosUsuarios.txt";
         listModel = leerNombresDesdeArchivo(nombreArchivo);
@@ -59,12 +58,9 @@ public class VentanaSeleccionDatos extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int selectedIndex = listaUsuarios.getSelectedIndex();
                 if (selectedIndex != -1) {
-//                    String usuarioSeleccionado = listModel.getElementAt(selectedIndex);
-                    // Abre una ventana de edición del usuario seleccionado o realiza la acción deseada.
-                    // Puedes implementar esta lógica aquí.
-                    // Por ejemplo, puedes abrir una nueva ventana de edición.
+//                    
                     abrirVentanaEdicion(selectedIndex);
-//                    listModel.setElementAt("Nuevo Usuario", selectedIndex);
+//                    
                 }
             }
         });
@@ -95,9 +91,9 @@ public class VentanaSeleccionDatos extends JFrame {
     	String valorPredeterminado = listModel.getElementAt(idx);
     	String entrada = JOptionPane.showInputDialog("Introduce el nombre modificado:",valorPredeterminado);
 
-        // Verifica si el usuario ha introducido algo
+        // Verificar si el usuario ha introducido algo
         if (entrada != null && !entrada.isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Ingresaste: " + entrada);
+//           
         	listModel.setElementAt(entrada, idx);
         } else {
             JOptionPane.showMessageDialog(null, "No hay modificación");

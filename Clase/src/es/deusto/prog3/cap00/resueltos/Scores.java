@@ -12,24 +12,24 @@ public class Scores {
         userScores = new HashMap<>();
     }
 
-    // Agrega una puntuación para un usuario dado
+    // Agregar una puntuación para un usuario dado
     public void addScore(String username, int score) {
-        // Verifica si el usuario ya existe en el mapa
+        // Verificar si el usuario ya existe en el hashmap
         if (userScores.containsKey(username)) {
             userScores.get(username).add(score); // Agrega la puntuación a la lista existente
         } else {
             List<Integer> scores = new ArrayList<>();
-            scores.add(score); // Crea una nueva lista y agrega la puntuación
+            scores.add(score); // Crear una nueva lista y agregar la puntuación
             userScores.put(username, scores);
         }
     }
 
-    // Obtiene todas las puntuaciones de un usuario
+    // Obtener todas las puntuaciones de un usuario
     public List<Integer> getScores(String username) {
         return userScores.get(username);
     }
 
-    // Obtiene la puntuación promedio de un usuario
+    // Obtener la puntuación promedio de un usuario
     public double getAverageScore(String username) {
         List<Integer> scores = userScores.get(username);
         if (scores == null || scores.isEmpty()) {
@@ -44,12 +44,12 @@ public class Scores {
         return (double) sum / scores.size();
     }
 
-    // Elimina todas las puntuaciones de un usuario
+    // Eliminar todas las puntuaciones de un usuario
     public void clearScores(String username) {
         userScores.remove(username);
     }
 
-    // Muestra todas las puntuaciones de todos los usuarios
+    // Mostrar todas las puntuaciones de todos los usuarios
     public void displayAllScores() {
         for (Map.Entry<String, List<Integer>> entry : userScores.entrySet()) {
             String username = entry.getKey();
