@@ -14,11 +14,12 @@ public class ErrorPintadoTardio {
 	public static void main(String[] args) {
 		// Creamos una ventana de ejemplo solo para meter un coche
 		JFrame f = new JFrame( "Ejemplo pintado tardío" );
-//		f.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
-		f.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+		f.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
 		f.getContentPane().setLayout( null ); // Layout nulo para posicionado manual de componentes
 		f.setSize( 500, 400 );
 		f.setLocation( 2000, 0 );
+		
+		f.setVisible( true );  // (1) Visualizamos (Quizás DEMASIADO PRONTO!)
 		
 		
 		JLabel lCoche = new JLabel();
@@ -26,9 +27,6 @@ public class ErrorPintadoTardio {
 		lCoche.setIcon( new ImageIcon( "src/es/deusto/prog3/cap00/coche.png"));  // (b) Opción de coger una imagen como fichero
 		lCoche.setBounds( 100, 50, 300, 300 );
 		f.getContentPane().add( lCoche );  // (2)
-		
-		f.setVisible( true );  // (1) Visualizamos (Quizás DEMASIADO PRONTO!)
-		
 		
 		System.out.println( "Fin" );
 		
