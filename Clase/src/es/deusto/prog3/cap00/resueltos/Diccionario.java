@@ -1,10 +1,11 @@
 package es.deusto.prog3.cap00.resueltos;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 public class Diccionario {
-    private TreeMap<String, ArrayList<String>> diccionario;
+    private TreeMap<String, List<String>> diccionario;
 
     public Diccionario() {
         diccionario = new TreeMap<>();
@@ -12,12 +13,31 @@ public class Diccionario {
 
     // Agregar una palabra con su definición al diccionario
     public void agregarPalabra(String palabra, String definicion) {
-        diccionario.computeIfAbsent(palabra, k -> new ArrayList<>()).add(definicion);
+    	/*
+    	 * Esta instrucción permite agregar una definición (definicion) a una entrada (palabra) del diccionario.
+    	 * Si la palabra ya existe en el diccionario, la definición se agrega a la lista existente de definiciones asociadas.
+    	 * Si la palabra no existe en el diccionario, se crea una nueva lista de definiciones y se asocia con la palabra en el diccionario
+    	 * antes de agregar la definición. 
+    	 */
+//        diccionario.computeIfAbsent(palabra, k -> new ArrayList<>()).add(definicion);
+    	
+    	//El siguiente trozo de código es lo que haría la instrucción anterior 
+        
+    	
+     // Verificar si la palabra ya existe
+        if (diccionario.containsKey(palabra)) {
+        	diccionario.get(palabra).add(definicion); // Agrega la puntuación a la lista existente
+        } else {
+            List<String> definiciones = new ArrayList<>();
+            definiciones.add(definicion); // Crear una nueva lista y agregar la puntuación
+            diccionario.put(palabra,definiciones);
+        }
     }
 
     // Obtener las definiciones de una palabra
-    public ArrayList<String> obtenerDefiniciones(String palabra) {
+    public List<String> obtenerDefiniciones(String palabra) {
         return diccionario.getOrDefault(palabra, new ArrayList<>());
+//    	return diccionario.get(palabra);
     }
 
     // Eliminar una palabra del diccionario
@@ -37,7 +57,7 @@ public class Diccionario {
 
         diccionario.agregarPalabra("Zafacoca", "Sustantivo femenino que significa un malentendido o una confusión, especialmente en una conversación o situación.");
         diccionario.agregarPalabra("Obnubilar", "Verbo que significa confundir, turbar o entenebrecer la mente o la vista de alguien.");
-        diccionario.agregarPalabra("Gerifalte", " Halcón de gran tamaño, que vive ordinariamente en el norte de Europa.");
+        diccionario.agregarPalabra("Gerifalte", "Halcón de gran tamaño, que vive ordinariamente en el norte de Europa.");
 
         System.out.println("Definiciones de 'Zafacoca': " + diccionario.obtenerDefiniciones("Zafacoca"));
         System.out.println("Definiciones de 'Gerifalte': " + diccionario.obtenerDefiniciones("Gerifalte"));
