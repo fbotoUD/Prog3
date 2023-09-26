@@ -56,25 +56,26 @@ public class TresEnRaya extends JFrame implements ActionListener {
     private boolean hayGanador() {
         // Verificar filas, columnas y diagonales
         for (int i = 0; i < 3; i++) {
+        	//filas
             if (tablero[i][0].getText().equals(String.valueOf(jugadorActual)) &&
                 tablero[i][1].getText().equals(String.valueOf(jugadorActual)) &&
                 tablero[i][2].getText().equals(String.valueOf(jugadorActual))) {
                 return true;
             }
-
+            //columnas
             if (tablero[0][i].getText().equals(String.valueOf(jugadorActual)) &&
                 tablero[1][i].getText().equals(String.valueOf(jugadorActual)) &&
                 tablero[2][i].getText().equals(String.valueOf(jugadorActual))) {
                 return true;
             }
         }
-
+        //Diagonal principal
         if (tablero[0][0].getText().equals(String.valueOf(jugadorActual)) &&
             tablero[1][1].getText().equals(String.valueOf(jugadorActual)) &&
             tablero[2][2].getText().equals(String.valueOf(jugadorActual))) {
             return true;
         }
-
+        //Diagonal secundaria 
         if (tablero[0][2].getText().equals(String.valueOf(jugadorActual)) &&
             tablero[1][1].getText().equals(String.valueOf(jugadorActual)) &&
             tablero[2][0].getText().equals(String.valueOf(jugadorActual))) {

@@ -36,7 +36,9 @@ public class Diccionario {
 
     // Obtener las definiciones de una palabra
     public List<String> obtenerDefiniciones(String palabra) {
+    	//Devuelve una lista vacía
         return diccionario.getOrDefault(palabra, new ArrayList<>());
+        //Devuelve null
 //    	return diccionario.get(palabra);
     }
 

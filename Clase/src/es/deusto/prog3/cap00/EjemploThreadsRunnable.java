@@ -1,5 +1,7 @@
 package es.deusto.prog3.cap00;
 
+import java.util.Random;
+
 public class EjemploThreadsRunnable {
     public static void main(String[] args) {
         // Creamos dos objetos de tipo Runnable
@@ -25,10 +27,12 @@ class MiRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < 5; i++) {
+    	Random rand = new Random();
+        for (int i = 0; i < 10; i++) {
             System.out.println(nombre + ": Contador " + i);
             try {
                 Thread.sleep(1000); // Hacemos que el hilo duerma por un segundo
+//            	Thread.sleep(rand.nextInt(2000));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
