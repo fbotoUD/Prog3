@@ -6,6 +6,8 @@ public class EjemploThreads {
         // Creamos dos objetos de tipo MiHilo
         MiHilo hilo1 = new MiHilo("Tarea 1");
         MiHilo hilo2 = new MiHilo("Tarea 2");
+        hilo1.setPriority(10);
+        hilo2.setPriority(3);
 
         // Iniciamos los hilos
         hilo1.start();
@@ -25,7 +27,7 @@ class MiHilo extends Thread {
         for (int i = 0; i < 5; i++) {
             System.out.println(nombre + ": Contador " + i);
             try {
-                Thread.sleep(1000); // Hacemos que el hilo duerma por un segundo
+                Thread.sleep(5000); // Hacemos que el hilo duerma por un segundo
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
