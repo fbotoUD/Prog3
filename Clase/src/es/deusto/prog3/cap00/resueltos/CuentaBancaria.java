@@ -54,16 +54,19 @@ public class CuentaBancaria {
     public static void main(String[] args) {
         CuentaBancaria cuenta = new CuentaBancaria();
 
-        Thread hiloDeposito = new Thread(() -> {
-            for (int i = 0; i < 5; i++) {
-                cuenta.depositar(200.0);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        Thread hiloDeposito = new Thread() {
+        	@Override
+            public void run() {
+	            for (int i = 0; i < 5; i++) {
+	                cuenta.depositar(200.0);
+	                try {
+	                    Thread.sleep(100);
+	                } catch (InterruptedException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+        	 }
+        };
 
         Thread hiloRetiro = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
