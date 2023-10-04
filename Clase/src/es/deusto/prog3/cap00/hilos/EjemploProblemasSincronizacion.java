@@ -4,7 +4,7 @@ package es.deusto.prog3.cap00.hilos;
  */
 public class EjemploProblemasSincronizacion implements Runnable {
 	private static Contador miContador = new Contador();
-	private static int CUANTAS_VECES = 10;
+	private static int CUANTAS_VECES = 1000;
 	@Override
 	public void run() {
 		for (int i = 0; i<CUANTAS_VECES; i++) {
@@ -33,7 +33,7 @@ public class EjemploProblemasSincronizacion implements Runnable {
 	
 	private static class Contador {
 	    private int c = 0;
-	    public void inc() {
+	    public /*synchronized*/ void inc() {
 	    	// Haciendo miContador++ valdría 
 	    	// pero se ve más claro el problema si se hace en pasos:
     		int d = c;
@@ -41,7 +41,7 @@ public class EjemploProblemasSincronizacion implements Runnable {
 	        c = d;		
 	    }
 
-	    public void dec() {
+	    public /*synchronized*/ void dec() {
 	    	// Haciendo miContador-- valdría 
 	    	// pero se ve más claro el problema si se hace en pasos:
     		int d = c;
