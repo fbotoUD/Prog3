@@ -4,9 +4,10 @@ package es.deusto.prog3.cap00.hilos;
  */
 public class EjemploProblemasSincronizacion implements Runnable {
 	private static Contador miContador = new Contador();
+	private static int CUANTAS_VECES = 10;
 	@Override
 	public void run() {
-		for (int i = 0; i<1000000000; i++) {
+		for (int i = 0; i<CUANTAS_VECES; i++) {
 			miContador.inc();
 			miContador.dec();
 		}
