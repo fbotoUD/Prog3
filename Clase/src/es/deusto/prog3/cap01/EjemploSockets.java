@@ -122,7 +122,7 @@ public class EjemploSockets {
 		}
 	    public void lanzaServidor() {
 	    	try(ServerSocket serverSocket = new ServerSocket( PUERTO )) {
-	    		socket = serverSocket.accept();  // Bloqueante
+	    		socket = serverSocket.accept();  // Bloqueante hasta que el cliente se conecta
 	    		lEstado.setText( "Cliente conectado" );
 	    		BufferedReader inputDesdeCliente = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	    		PrintWriter outputACliente = new PrintWriter(socket.getOutputStream(), true);
