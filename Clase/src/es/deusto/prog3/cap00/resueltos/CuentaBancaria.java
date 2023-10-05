@@ -78,7 +78,6 @@ public class CuentaBancaria {
             public void run() {
 	            for (int i = 0; i < 5; i++) {
 	                cuenta.depositar(200.0);
-//	                cuenta.retirar(150.0);
 	                try {
 	                    Thread.sleep(100);
 	                } catch (InterruptedException e) {
@@ -90,7 +89,6 @@ public class CuentaBancaria {
 
         Thread hiloRetiro = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
-//            	cuenta.depositar(200.0);
                 cuenta.retirar(150.0);
                 try {
                     Thread.sleep(100);
