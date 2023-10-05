@@ -3,7 +3,9 @@ package es.deusto.prog3.cap00.resueltos;
 /**
  * Supongamos que tienes un programa que simula la gestión de una cuenta bancaria compartida entre varios hilos.
  * La cuenta bancaria tiene un saldo inicial de 1000 euros. 
- * Progrma dos hilos que intenten realizar depósitos y retiradas de dinero simultáneamente en la cuenta.
+ * Programa dos hilos que intenten realizar depósitos y retiradas de dinero simultáneamente en la cuenta.
+ * A la hora depositar o retirar dinero simula una verificación del saldo antes de modificar y actualiza el saldo verificado
+ * Esto te permitirá ver que hay un problema
  * Es importante que la cuenta se maneje de manera segura para evitar que varios hilos accedan al saldo de la cuenta al mismo tiempo y generen inconsistencias.
  * Implementa un programa que utilice el bloque synchronized para garantizar la concurrencia segura en la gestión de la cuenta bancaria.
  */
@@ -12,25 +14,42 @@ public class CuentaBancaria {
     private double saldo = 1000.0;
 
     /**
-     * Método depositar dinero en la cuenta
+     * Método que simula la verificación del saldo
+     * @param cantidad
+     * @return cantidad verificada
+     */
+    public double verificarSaldo(double cantidad) {
+    	try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cantidad;
+    }
+    
+    /**
+     * Método depositar dinero en la cuenta. Actualiza el saldo verificado
      * @param cantidad
      * @return void
      */
     public synchronized void depositar(double cantidad) {
         System.out.println("Realizando depósito de " + cantidad + " euros.");
-        saldo += cantidad;
+        double saldoVerificado = verificarSaldo(cantidad);
+        saldo += saldoVerificado;
         System.out.println("Saldo después del depósito: " + saldo + " euros.");
     }
 
     /**
-     * Método retirar dinero de la cuenta
+     * Método retirar dinero de la cuenta. Actualiza el saldo verificado
      * @param cantidad
      * @return void
      */
     public synchronized void retirar(double cantidad) {
         if (saldo >= cantidad) {
             System.out.println("Realizando retiro de " + cantidad + " euros.");
-            saldo -= cantidad;
+            double saldoVerificado = verificarSaldo(cantidad);
+            saldo -= saldoVerificado;
             System.out.println("Saldo después del retiro: " + saldo + " euros.");
         } else {
             System.out.println("Saldo insuficiente para realizar el retiro de " + cantidad + " euros.");
@@ -59,6 +78,7 @@ public class CuentaBancaria {
             public void run() {
 	            for (int i = 0; i < 5; i++) {
 	                cuenta.depositar(200.0);
+//	                cuenta.retirar(150.0);
 	                try {
 	                    Thread.sleep(100);
 	                } catch (InterruptedException e) {
@@ -70,6 +90,7 @@ public class CuentaBancaria {
 
         Thread hiloRetiro = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
+//            	cuenta.depositar(200.0);
                 cuenta.retirar(150.0);
                 try {
                     Thread.sleep(100);
