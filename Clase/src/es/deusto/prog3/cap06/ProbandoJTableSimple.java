@@ -15,12 +15,13 @@ public class ProbandoJTableSimple {
 	private static JTable tabla;
 	
 	private static DefaultTableModel modelo;
+
 	public static void main(String[] args) {
 		
 		vent = new JFrame();
 		vent.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		vent.setSize(400,300);
-//		vent.setLocation(2000, 0);
+		vent.setLocation(2000, 0);
 		
 		//Hay componentes que se asocia un modelo de datos JTable es uno de ellos
 		//Patrón de diseño en el que por una parte tengo la gestión de los datos y por otro la visualización
@@ -44,11 +45,12 @@ public class ProbandoJTableSimple {
 		modelo.addRow(new Object[] {"Oihan",250});
 		
 		//Anchura columnas (es visual está en la tabla, no en el modelo)
-		tabla.getColumnModel().getColumn(0).setPreferredWidth(200);
+//		tabla.getColumnModel().getColumn(0).setPreferredWidth(200);
 //		tabla.getColumnModel().getColumn(1).setPreferredWidth(300);
 		tabla.getColumnModel().getColumn(0).setMaxWidth(300);
+		tabla.getColumnModel().getColumn(0).setMinWidth(100);
 //		tabla.getColumnModel().getColumn(0).setMinWidth(100);
-//		tabla.getColumnModel().getColumn(1).setMaxWidth(100);
+//		tabla.getColumnModel().getColumn(1).setMaxWidth(200);
 //		tabla.getColumnModel().getColumn(1).setMinWidth(80);
 		
 		//Investigamos el modelo
@@ -73,14 +75,19 @@ public class ProbandoJTableSimple {
 			public void setValueAt(Object aValue, int row, int column) {
 				System.out.println("setValueAt "+row+","+column +"->" +aValue);
 //				if (aValue.getClass().equals(String.class)) return;
-				try {
-					int valor = Integer.parseInt(aValue+"");
-					if (valor <=255) {
-						super.setValueAt(aValue, row, column);
+				if(column==0) {
+					super.setValueAt(aValue, row, column);
+				}
+				else {
+					try {
+						int valor = Integer.parseInt(aValue+"");
+						if (valor <=255) {
+							super.setValueAt(aValue, row, column);
+						}
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 				
 				
@@ -88,9 +95,12 @@ public class ProbandoJTableSimple {
 			
 		};
 		modelo.addRow(new Object[] {"Osane",70});
-		modelo.addRow(new Object[] {"Ane",500});
+		modelo.addRow(new Object[] {"Ane",125});
 		modelo.addRow(new Object[] {"Oihan",250});
 		tabla.setModel(modelo);
+		
+		//Evitar reordenación de columnas
+//		tabla.getTableHeader().setReorderingAllowed(false);
 //		
 //		
 //		//Siguiente clase Renderer...
