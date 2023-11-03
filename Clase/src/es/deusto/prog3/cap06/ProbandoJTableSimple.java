@@ -4,9 +4,13 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.EventObject;
 
 import javax.swing.event.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
+import org.hamcrest.core.IsInstanceOf;
 
 
 public class ProbandoJTableSimple {
@@ -21,7 +25,7 @@ public class ProbandoJTableSimple {
 		vent = new JFrame();
 		vent.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		vent.setSize(400,300);
-		vent.setLocation(2000, 0);
+//		vent.setLocation(2000, 0);
 		
 		//Hay componentes que se asocia un modelo de datos JTable es uno de ellos
 		//Patrón de diseño en el que por una parte tengo la gestión de los datos y por otro la visualización
@@ -103,9 +107,108 @@ public class ProbandoJTableSimple {
 //		tabla.getTableHeader().setReorderingAllowed(false);
 //		
 //		
-//		//Siguiente clase Renderer...
-//		
-//		tabla.setDefaultRenderer(null, null);	
+
+		tabla.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+					boolean hasFocus, int row, int column) {
+				// TODO Auto-generated method stub
+				Component compo = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				System.out.println("Soy un JLabel?: "+(compo instanceof JLabel));
+				JLabel label = (JLabel)compo;
+				if (column == 0) {
+					compo.setBackground(Color.GRAY);
+				}
+				else {
+					compo.setBackground(Color.WHITE);
+					int valor = (int) modelo.getValueAt(row, column);
+					compo = new JSlider(0,255,valor);
+				}
+				return compo;
+			}
+			
+		});
+		
+		tabla.setDefaultEditor(Object.class, new DefaultCellEditor(new JTextField()) {
+			int valorAnt;
+			Component compo;
+			JTextField tf;
+			
+
+			@Override
+			public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
+					int column) {
+				
+				compo = super.getTableCellEditorComponent(table, value, isSelected, row, column);
+				tf = (JTextField) compo;
+				if(column == 1) {
+					int valor = (int) value;
+					tf = null;
+					compo = new JSlider(0,255,valor);
+					((JSlider)compo).addChangeListener(new ChangeListener() {
+						
+						@Override
+						public void stateChanged(ChangeEvent e) {
+							valorAnt = ((JSlider)compo).getValue();
+							
+						}
+					});
+					
+				}
+				
+				
+				return compo;
+			}
+			
+			
+			@Override
+			public Object getCellEditorValue() {
+				if (tf != null) {
+					return tf.getText();
+				}
+				else {
+					return valorAnt;
+				}
+				
+			}
+			
+		});
+		
+		
+		
+		tabla.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 				
 		
 		vent.setVisible(true);
